@@ -10,7 +10,7 @@ on:
       - main
   workflow_dispatch:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '* * * * *'
 
 jobs:
   scheduled:
@@ -19,20 +19,21 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Download image
-      run: |-
-        IMAGE_URL=https://www.meteocampoo.es/webcam/actual/18-valderredible-navamuel.jpg
-        FORMATED_DATE=`date +'%Y-%m-%d_%H-%M'`
-        wget $IMAGE_URL -O $FORMATED_DATE.jpg
-
     - name: Configure git
       run: |-
         git config user.name "Github Actions"
         git config user.email "actions@users.noreply.github.com"
 
-    - name: Commit and push the images
+    - name: Download image
+      run: |-
+        IMAGE_URL=https://www.meteocampoo.es/webcam/actual/18-valderredible-navamuel.jpg
+        FORMATED_DATE=`TZ='Europe/Madrid' date +'%Y-%m-%d_%H-%M'`
+        wget $IMAGE_URL -O imgs/$FORMATED_DATE.jpg
+
+    - name: Add and commit the images
       run: |-
         timestamp=$(date -u)
         git add .
         git commit -am "Latest data: ${timestamp}" || exit 0
+
     - run: git push
