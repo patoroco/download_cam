@@ -13,7 +13,7 @@ on:
     - cron: '*/2 * * * *'
 
 jobs:
-  scheduled:
+  download_and_commit:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
