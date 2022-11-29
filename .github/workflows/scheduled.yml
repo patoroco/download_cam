@@ -1,0 +1,37 @@
+# From: https://simonwillison.net/2021/Mar/5/git-scraping/
+# Example: https://github.com/simonw/disaster-scrapers/blob/2511decf8d9a317d4db8ef1e6c4ca2069aaaee77/.github/workflows/scheduled.yml#L1
+
+name: Download images from meteocam
+# https://www.meteocampoo.es/webcam/actual/18-valderredible-navamuel.jpg
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *'
+
+jobs:
+  scheduled:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Download image
+      run: |-
+        IMAGE_URL=https://www.meteocampoo.es/webcam/actual/18-valderredible-navamuel.jpg
+        FORMATED_DATE=`date +'%Y-%m-%d_%H-%M'`
+        wget $IMAGE_URL -O $FORMATED_DATE.jpg
+
+    - name: Configure git
+      run: |-
+        git config user.name "Github Actions"
+        git config user.email "actions@users.noreply.github.com"
+
+    - name: Commit and push the images
+      run: |-
+        timestamp=$(date -u)
+        git commit -am "Latest data: ${timestamp}" || exit 0
+    - run: git push
