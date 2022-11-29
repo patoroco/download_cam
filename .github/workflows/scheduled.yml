@@ -33,5 +33,6 @@ jobs:
     - name: Commit and push the images
       run: |-
         timestamp=$(date -u)
+        git add .
         git commit -am "Latest data: ${timestamp}" || exit 0
     - run: git push
