@@ -9,6 +9,11 @@ on:
     branches:
       - main
   workflow_dispatch:
+
+  # This event occurs when a GitHub App sends a POST request to /repos/{owner}/{repo}/dispatches.
+  # https://docs.github.com/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#repository_dispatch
+  repository_dispatch:
+  
   schedule:
     - cron: '*/2 * * * *'
 
