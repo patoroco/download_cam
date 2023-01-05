@@ -38,9 +38,10 @@ for path in os.listdir(MERGING_PATHS):
         data = f.read()
         md5hash = hashlib.md5(data).hexdigest()
 
-        if hashes.get(md5hash):
-            print(f"{file_path} --> EXISTE!")
+    if hashes.get(md5hash):
+        os.remove(file_path)
+        print(f"{file_path} ({md5hash}) --> BORRADO")
+        continue
 
-        hashes[md5hash] = file_path
-        
-        print(f"{file_path} --> {md5hash}")
+    hashes[md5hash] = file_path
+    print(f"{file_path} ({md5hash})")
