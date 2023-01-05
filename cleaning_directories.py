@@ -7,9 +7,6 @@ import shutil
 IMAGES_FOLDER = "./imgs"
 
 for path in os.listdir(IMAGES_FOLDER):
-    if path.startswith("2022"):
-        continue
-
     if path.endswith(".jpg"):
         pattern = r'(\d{4})-(\d{2})-(\d{2})'
         m = re.search(pattern, path)
