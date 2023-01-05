@@ -2,4 +2,4 @@
 Downloading the image from https://www.meteocampoo.es/webcam/valderredible-navamuel.html every minute
 
 ## Example
-![](imgs/2022-11-29_23-39.jpg)
+![](imgs/2023/01/05/2023-01-05_12-20.jpg)
