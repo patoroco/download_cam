@@ -5,15 +5,15 @@ name: Download images from meteocam
 # https://www.meteocampoo.es/webcam/actual/18-valderredible-navamuel.jpg
 
 on:
-#  push:
-#    branches:
-#      - main
+  #  push:
+  #    branches:
+  #      - main
   workflow_dispatch:
 
   # This event occurs when a GitHub App sends a POST request to /repos/{owner}/{repo}/dispatches.
   # https://docs.github.com/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#repository_dispatch
   repository_dispatch:
-  
+
   # schedule:
   #   - cron: '*/2 * * * *'
 
@@ -22,23 +22,26 @@ jobs:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Configure git
-      run: |-
-        git config user.name "Github Actions"
-        git config user.email "actions@users.noreply.github.com"
+      - name: Configure git
+        run: |-
+          git config user.name "Github Actions"
+          git config user.email "actions@users.noreply.github.com"
 
-    - name: Download image
-      run: |-
-        IMAGE_URL=https://www.meteocampoo.es/webcam/actual/18-valderredible-navamuel.jpg
-        FORMATED_DATE=`TZ='Europe/Madrid' date +'%Y-%m-%d_%H-%M'`
-        wget $IMAGE_URL -O imgs/$FORMATED_DATE.jpg
+      - name: Download image
+        run: |-
+          IMAGE_URL=https://www.meteocampoo.es/webcam/actual/18-valderredible-navamuel.jpg
+          FORMATED_DATE=`TZ='Europe/Madrid' date +'%Y-%m-%d_%H-%M'`
+          wget $IMAGE_URL -O imgs/$FORMATED_DATE.jpg
 
-    - name: Add and commit the images
-      run: |-
-        timestamp=$(date -u)
-        git add .
-        git commit -am "Latest data: ${timestamp}" || exit 0
+      - name: Cleaning the directory
+        run: python cleaning_directories.py
 
-    - run: git push
+      - name: Add and commit the images
+        run: |-
+          timestamp=$(date -u)
+          git add .
+          git commit -am "Latest data: ${timestamp}" || exit 0
+
+      - run: git push
