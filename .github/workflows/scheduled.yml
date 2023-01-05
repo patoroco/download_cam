@@ -32,11 +32,11 @@ jobs:
       - name: Download image
         run: |-
           IMAGE_URL=https://www.meteocampoo.es/webcam/actual/18-valderredible-navamuel.jpg
-          FORMATED_DATE=`TZ='Europe/Madrid' date +'%Y-%m-%d_%H-%M'`
+          FORMATED_DATE=`TZ='Europe/Madrid' date +'%Y/%m/%d/%Y-%m-%d_%H-%M'`
           wget $IMAGE_URL -O imgs/$FORMATED_DATE.jpg
 
-      - name: Cleaning the directory
-        run: python cleaning_directories.py
+      # - name: Cleaning the directory
+      #   run: python cleaning_directories.py
 
       - name: Add and commit the images
         run: |-
