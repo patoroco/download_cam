@@ -5,17 +5,17 @@ name: Download images from meteocam
 # https://www.meteocampoo.es/webcam/actual/18-valderredible-navamuel.jpg
 
 on:
-  push:
-    branches:
-      - main
+#  push:
+#    branches:
+#      - main
   workflow_dispatch:
 
   # This event occurs when a GitHub App sends a POST request to /repos/{owner}/{repo}/dispatches.
   # https://docs.github.com/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#repository_dispatch
   repository_dispatch:
   
-  schedule:
-    - cron: '*/2 * * * *'
+  # schedule:
+  #   - cron: '*/2 * * * *'
 
 jobs:
   download_and_commit:
