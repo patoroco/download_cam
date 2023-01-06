@@ -16,7 +16,9 @@ def create_gif(year, month, day):
 
     result_gif = os.path.join(result_dir, f"{year}-{month}-{day}.gif")
 
-    print(f"ffmpeg -f image2 -framerate 18 -pattern_type glob -i '{source_imgs}/*.jpg' -loop -1 -vf scale=480:-1 '{result_gif}'")
+    command = f"ffmpeg -f image2 -framerate 18 -pattern_type glob -i '{source_imgs}/*.jpg' -loop -1 -vf scale=480:-1 '{result_gif}'"
+    print(command)
+    os.system(command)
 
 
 def check_gif_existence(year, month, day):
