@@ -1,0 +1,16 @@
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  generate_gif:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: FedericoCarboni/setup-ffmpeg@v2
+        id: setup-ffmpeg
+      - run: ffmpeg -f image2 -framerate 18 -pattern_type glob -i 'imgs/2023/01/06/*.jpg' -loop -1 output.gif
