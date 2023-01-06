@@ -1,0 +1,32 @@
+name: Generate GIFs from day images
+on:
+  push:
+    branches-ignore:
+      - main
+
+  schedule:
+    # * execute every day at 04:01 (workaround to avoid errors with the timezones)
+    - cron: "1 4 * * *"
+
+jobs:
+  generate_gif:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Configure git
+        run: |-
+          git config user.name "Github Actions"
+          git config user.email "actions@users.noreply.github.com"
+
+      - uses: FedericoCarboni/setup-ffmpeg@v2
+        id: setup-ffmpeg
+      - run: python create_gifs.py
+
+      - name: Add and commit the images
+        run: |-
+          timestamp=$(date -u)
+          git add .
+          git commit -am "Adding some gifs :D ${timestamp}" || exit 0
+
+      - run: git push
