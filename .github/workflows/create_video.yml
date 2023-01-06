@@ -4,6 +4,10 @@ on:
     branches-ignore:
       - main
 
+  # This event allows to trigger the workflow manually from
+  # https://github.com/patoroco/download_cam/actions/workflows/scheduled.yml
+  workflow_dispatch:
+
   schedule:
     # * execute every day at 04:01 (workaround to avoid errors with the timezones)
     - cron: "1 4 * * *"
