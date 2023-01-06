@@ -26,7 +26,7 @@ for path in os.listdir(IMAGES_FOLDER):
 
     shutil.move(old_path, new_path)
 
-MERGING_PATHS = "./imgs/2023/01/05"
+MERGING_PATHS = "./imgs/2023/01/06"
 hashes = {}
 
 for path in os.listdir(MERGING_PATHS):
