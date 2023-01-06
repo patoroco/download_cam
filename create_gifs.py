@@ -11,9 +11,9 @@ def create_gif(year, month, day):
     result_dir = os.path.join(GIFS_FOLDER, f"{year}/{month}")
     os.makedirs(result_dir, exist_ok=True)
 
-    result_gif = os.path.join(result_dir, f"{year}-{month}-{day}.gif")
+    result_gif = os.path.join(result_dir, f"{year}-{month}-{day}.mp4")
 
-    command = f"ffmpeg -f image2 -framerate 18 -pattern_type glob -i '{source_imgs}/*.jpg' -loop -1 -vf scale=480:-1 '{result_gif}'"
+    command = f"ffmpeg -framerate 18 -pattern_type glob -i '{source_imgs}/*.jpg' -c:v libx264 -r 30 -vf scale=480:270 '{result_gif}'"
     os.system(command)
 
 
@@ -51,7 +51,7 @@ for year in years:
         days = [day for day in os.listdir(month_path) if os.path.isdir(os.path.join(month_path, day))]
         
         for day in days:
-            if is_today(year, month, day):
+            if not is_today(year, month, day):
                 print(f"Skipping: {year}-{month}-{day}")
                 continue
             
