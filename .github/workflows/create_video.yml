@@ -1,9 +1,12 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: Generate GIFs from day images
 on:
   push:
     branches-ignore:
       - main
+
+  schedule:
+    # * execute every day at 04:01 (workaround to avoid errors with the timezones)
+    - cron: "1 4 * * *"
 
 jobs:
   generate_gif:
