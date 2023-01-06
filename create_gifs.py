@@ -19,7 +19,7 @@ def create_gif(year, month, day):
 
 def check_gif_existence(year, month, day):
     result_dir = os.path.join(GIFS_FOLDER, f"{year}/{month}")
-    result_gif = os.path.join(result_dir, f"{year}-{month}-{day}.gif")
+    result_gif = os.path.join(result_dir, f"{year}-{month}-{day}.mp4")
 
     return os.path.exists(result_gif)
 
@@ -51,7 +51,7 @@ for year in years:
         days = [day for day in os.listdir(month_path) if os.path.isdir(os.path.join(month_path, day))]
         
         for day in days:
-            if not is_today(year, month, day):
+            if is_today(year, month, day):
                 print(f"Skipping: {year}-{month}-{day}")
                 continue
             
