@@ -11,15 +11,15 @@ def create_gif(year, month, day):
     result_dir = os.path.join(GIFS_FOLDER, f"{year}/{month}")
     os.makedirs(result_dir, exist_ok=True)
 
-    result_gif = os.path.join(result_dir, f"{year}-{month}-{day}.gif")
+    result_gif = os.path.join(result_dir, f"{year}-{month}-{day}.mp4")
 
-    command = f"ffmpeg -f image2 -framerate 18 -pattern_type glob -i '{source_imgs}/*.jpg' -loop -1 -vf scale=480:-1 '{result_gif}'"
+    command = f"ffmpeg -framerate 18 -pattern_type glob -i '{source_imgs}/*.jpg' -c:v libx264 -r 30 -vf scale=480:270 '{result_gif}'"
     os.system(command)
 
 
 def check_gif_existence(year, month, day):
     result_dir = os.path.join(GIFS_FOLDER, f"{year}/{month}")
-    result_gif = os.path.join(result_dir, f"{year}-{month}-{day}.gif")
+    result_gif = os.path.join(result_dir, f"{year}-{month}-{day}.mp4")
 
     return os.path.exists(result_gif)
 
