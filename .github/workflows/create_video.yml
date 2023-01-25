@@ -12,6 +12,7 @@ on:
     # * execute every day at 04:01 (workaround to avoid errors with the timezones)
     - cron: "1 4 * * *"
 
+# TODO: check the video: https://www.meteocampoo.es/webcam/timelapse/valderredible-navamuel/valderredible-navamuel.mp4
 jobs:
   generate_gif:
     timeout-minutes: 5
