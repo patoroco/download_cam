@@ -27,7 +27,7 @@ jobs:
 
       - name: Download image
         run: |-
-          IMAGE_URL=https://www.meteocampoo.es/webcam/actual/18-valderredible-navamuel.jpg
+          IMAGE_URL=https://www.meteocampoo.es/webcam/actual/20-valderredible-navamuel.jpg
           FORMATED_DATE=`TZ='Europe/Madrid' date +'%Y/%m/%d/%Y-%m-%d_%H-%M'`
           curl $IMAGE_URL --create-dirs -o imgs/$FORMATED_DATE.jpg
 
